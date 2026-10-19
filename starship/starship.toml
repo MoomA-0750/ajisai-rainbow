@@ -2,19 +2,19 @@
 
 # Ajisai Rainbow 用の Starship 設定
 # 色は 16 色の番号（1〜6）で書き、端末のテーマから取る。Ghostty が明暗を切り替えると、プロンプトも一緒に変わる。
-# 帯の文字は inverted（反転）で、端末の背景色になる。暗い版・明るい版のどちらでも対比 4.2 以上。
-# 帯の並び: ピンク → 紫 → 青 → シアン → 緑 → 黄（紫陽花から虹へ）
+# 帯の文字は inverted（反転）で、端末の背景色になる。暗い版・明るい版のどちらでも対比 4.3 以上。
+# 帯の並び: 紫 → 青 → 空色 → 葉の緑。絵の紫と青の紫陽花、空、葉の順。絵にないピンクと黄は帯に使わない
 
 format = """
-[](fg:1)\
+[](fg:5)\
 $os\
 $username\
-[](fg:1 bg:5)\
-$directory\
 [](fg:5 bg:4)\
+$directory\
+[](fg:4 bg:6)\
 $git_branch\
 $git_status\
-[](fg:4 bg:6)\
+[](fg:6 bg:2)\
 $c\
 $rust\
 $golang\
@@ -24,18 +24,16 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:6 bg:2)\
 $conda\
-[](fg:2 bg:3)\
+[ ](fg:2)\
 $time\
-[ ](fg:3)\
 $cmd_duration\
 $line_break\
 $character"""
 
 [os]
 disabled = false
-style = "fg:1 inverted"
+style = "fg:5 inverted"
 
 [os.symbols]
 Windows = ""
@@ -61,13 +59,13 @@ RedHatEnterprise = "󱄛"
 
 [username]
 show_always = true
-style_user = "fg:1 inverted"
-style_root = "bold fg:1 inverted"
+style_user = "fg:5 inverted"
+style_root = "bold fg:5 inverted"
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:5 inverted"
-read_only_style = "fg:5 inverted"
+style = "fg:4 inverted"
+read_only_style = "fg:4 inverted"
 format = "[ $path ]($style)[$read_only]($read_only_style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -81,11 +79,11 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "fg:4 inverted"
+style = "fg:6 inverted"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "fg:4 inverted"
+style = "fg:6 inverted"
 ahead = '⇡${count}'
 behind = '⇣${count}'
 diverged = '⇕'
@@ -99,65 +97,65 @@ format = '[($all_status$ahead_behind )]($style)'
 
 [nodejs]
 symbol = ""
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $version) ]($style)'
 
 [c]
 symbol = " "
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $version) ]($style)'
 
 [rust]
 symbol = ""
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $version) ]($style)'
 
 [golang]
 symbol = ""
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $version) ]($style)'
 
 [php]
 symbol = ""
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $version) ]($style)'
 
 [java]
 symbol = " "
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $version) ]($style)'
 
 [kotlin]
 symbol = ""
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $version) ]($style)'
 
 [haskell]
 symbol = ""
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $version) ]($style)'
 
 [python]
 symbol = ""
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $version)(\(#$virtualenv\)) ]($style)'
 
 [docker_context]
 symbol = ""
-style = "fg:6 inverted"
+style = "fg:2 inverted"
 format = '[ $symbol( $context) ]($style)'
 
 [conda]
 symbol = "  "
 style = "fg:2 inverted"
-format = '[$symbol$environment ]($style)'
+format = '[ $symbol$environment ]($style)'
 ignore_base = false
 
 [time]
 disabled = false
 time_format = "%R"
-style = "fg:3 inverted"
-format = '[  $time ]($style)'
+style = "fg:8"
+format = '[ $time]($style) '
 
 [line_break]
 disabled = true
@@ -169,7 +167,7 @@ error_symbol = '[❯](bold fg:1)'
 vimcmd_symbol = '[❮](bold fg:2)'
 vimcmd_replace_one_symbol = '[❮](bold fg:5)'
 vimcmd_replace_symbol = '[❮](bold fg:5)'
-vimcmd_visual_symbol = '[❮](bold fg:3)'
+vimcmd_visual_symbol = '[❮](bold fg:6)'
 
 [cmd_duration]
 show_milliseconds = true
