@@ -1,0 +1,23 @@
+# Ajisai Rainbow — 雨上がりの紫陽花と海、空の虹のピクセルアートから
+background = #0e2a35
+foreground = #c3f9f0
+cursor-color = #8adae3
+cursor-text = #0e2a35
+selection-background = #1d5f73
+selection-foreground = #e8fffb
+palette = 0=#163f4d
+palette = 1=#ec8fb4
+palette = 2=#5ccf96
+palette = 3=#e6df9a
+palette = 4=#4aa6f2
+palette = 5=#b996ec
+palette = 6=#5cc3cc
+palette = 7=#b5e3e0
+palette = 8=#4d8595
+palette = 9=#f6b0cc
+palette = 10=#8eebbd
+palette = 11=#f4f0c2
+palette = 12=#7cc2ff
+palette = 13=#d6b8f7
+palette = 14=#8ee6ec
+palette = 15=#e8fffb
