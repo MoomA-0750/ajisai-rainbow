@@ -1,8 +1,8 @@
 # Ajisai Rainbow Light — 同じ絵の昼の空と雲の色を背景にした明るい版
-background = #dcf6f1
+background = #c9f7ed
 foreground = #12404f
 cursor-color = #2b9da7
-cursor-text = #dcf6f1
+cursor-text = #c9f7ed
 selection-background = #a6e3e6
 selection-foreground = #0e2a35
 palette = 0=#12404f
