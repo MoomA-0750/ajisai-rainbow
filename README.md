@@ -1,6 +1,6 @@
 # Ajisai Rainbow
 
-雨上がりの紫陽花、海、空にかかる虹を描いたドット絵から色を取った、ターミナル用のカラーテーマ。今は Ghostty 版だけがある。
+雨上がりの紫陽花、海、空にかかる虹を描いたドット絵から色を取った、ターミナル用のカラーテーマ。Ghostty のテーマと、それに合わせた Starship・lsd の設定がある。
 
 色の出典: 1041uuu さんのドット絵（<https://www.tumblr.com/1041uuu/122075241013>）。このリポジトリは色を参考にしただけで、絵そのものは含まない。
 
@@ -26,11 +26,26 @@ ln -sf "$PWD"/ghostty/ajisai-rainbow* ~/.config/ghostty/themes/
 theme = light:ajisai-rainbow-light,dark:ajisai-rainbow
 ```
 
+## Starship・lsd で使う
+
+どちらも色を 16 色の番号で書いてあり、端末のテーマから色を取る。Ghostty が明暗を切り替えると、プロンプトと `lsd` の色も一緒に変わる。
+
+![Starship と lsd](docs/shell.png)
+
+```sh
+ln -sf "$PWD"/starship/starship.toml ~/.config/starship.toml
+mkdir -p ~/.config/lsd && ln -sf "$PWD"/lsd/colors.yaml ~/.config/lsd/colors.yaml
+```
+
+- Starship: 帯はピンク → 紫 → 青 → シアン → 緑 → 黄の順（紫陽花から虹へ）。帯の文字は反転（`inverted`）で端末の背景色になり、暗い版・明るい版のどちらでも対比 4.2 以上。記号に Nerd Font を使う
+- lsd: `~/.config/lsd/config.yaml` に `color: { theme: custom }` を書くと `colors.yaml` が読まれる。ファイル名の色は `LS_COLORS` から取るので、この設定では変わらない
+
 ## 色を直したとき
 
 ```sh
 python3 tools/contrast.py                      # 背景との対比（WCAG のコントラスト比）を表示
 python3 tools/preview.py <等幅フォントのパス> docs/preview.png   # 色見本を描き直す（Pillow が要る）
+python3 tools/preview_shell.py <等幅フォントのパス> <ANSI のテキスト> docs/shell.png   # Starship と lsd の見本を描き直す
 ```
 
 暗い版は文字 12.9、明るい版は 9.6 の対比がある。元の絵は他人の作品の可能性があるため、このリポジトリには入れていない。

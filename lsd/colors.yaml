@@ -1,0 +1,43 @@
+# Ajisai Rainbow 用の lsd の色（~/.config/lsd/colors.yaml）
+# config.yaml で color.theme: custom にすると読まれる。
+# 色は 16 色の番号で書き、端末のテーマから取る。Ghostty が明暗を切り替えると lsd の色も変わる。
+# 1=ピンク 2=葉の緑 3=灯りの黄 4=青い紫陽花 5=紫の紫陽花 6=空 8=くすんだ青緑（控えめな情報）
+---
+user: 5
+group: 4
+permission:
+  read: 2
+  write: 3
+  exec: 1
+  exec-sticky: 5
+  no-access: 8
+  octal: 6
+  acl: 6
+  context: 14
+date:
+  hour-old: 14
+  day-old: 6
+  older: 8
+size:
+  none: 8
+  small: 6
+  medium: 4
+  large: 5
+inode:
+  valid: 13
+  invalid: 8
+links:
+  valid: 13
+  invalid: 8
+tree-edge: 8
+git-status:
+  default: 8
+  unmodified: 8
+  ignored: 8
+  new-in-index: 2
+  new-in-workdir: 2
+  typechange: 3
+  deleted: 1
+  renamed: 2
+  modified: 3
+  conflicted: 1
