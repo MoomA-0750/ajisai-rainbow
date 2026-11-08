@@ -1,27 +1,39 @@
-# Ajisai Rainbow for VS Code
+# Ajisai Rainbow
 
-雨上がりの紫陽花と海、空にかかる虹を描いたドット絵から色を取った配色テーマ。暗い版と明るい版がある。
+A color theme taken from a pixel-art scene of hydrangeas after the rain, the sea, and a rainbow across the sky. Comes in a dark and a light variant.
 
-A color theme taken from a pixel-art scene of hydrangeas after the rain, the sea, and a rainbow — dark and light variants.
+![Ajisai Rainbow (dark)](https://raw.githubusercontent.com/MoomA-0750/ajisai-rainbow/main/vscode/images/dark.png)
 
-| テーマ | 背景 | 文字 |
+![Ajisai Rainbow Light](https://raw.githubusercontent.com/MoomA-0750/ajisai-rainbow/main/vscode/images/light.png)
+
+| Theme | Background | Text |
 |---|---|---|
-| Ajisai Rainbow | `#0e2a35`（地面の深い青緑） | `#c3f9f0`（雲のミント） |
-| Ajisai Rainbow Light | `#c9f7ed`（昼の空と雲） | `#12404f`（紺） |
+| Ajisai Rainbow | `#0e2a35` deep teal of the ground | `#c3f9f0` mint of the clouds |
+| Ajisai Rainbow Light | `#c9f7ed` daytime sky and clouds (editor `#dffaf4`) | `#12404f` navy |
 
-- 色は絵の色の割合に合わせて割り当てた。コードで多く出る役目ほど、絵で多く使われている色にしている。予約語は葉の深緑、文字列は鮮やかな葉、関数は紫陽花の青、型は海。紫陽花の紫は数と定数・正規表現だけの差し色で、赤と黄は文法に使わない（誤りと警告の表示だけ）。
-- 変数とプロパティは文字の色、引数はその斜体、記号は色味を抜いた灰色。
-- 括弧の色分けは、絵の虹の3本（灰色寄りの藤色・ミント・空色）。
-- 統合ターミナルの16色は、同じリポジトリの Ghostty のテーマと同じ。
-- 明るい版のエディターは、文字を見分けやすいよう背景を薄いミント（`#dffaf4`）にして、周りに空と雲の色を残した。
+## How the colors were chosen
 
-色の出典: 1041uuu さんのドット絵（<https://www.tumblr.com/1041uuu/122075241013>）。このテーマは色を参考にしただけで、絵そのものは含まない。
+The picture is mostly pale mint sky and clouds (58%), leaves in deep and vivid greens (16%), the sea (7%), and hydrangeas as an accent — blue (4.5%) and purple (1.4%). There is no red or yellow at all.
 
-## 使い方
+The syntax colors follow the same proportions: the more often a kind of token appears in code, the more common its color is in the picture.
 
-拡張機能のビューで「Ajisai Rainbow」を探して入れ、コマンドパレットの「Preferences: Color Theme」で選ぶ。Windows・macOS・Linux のデスクトップ版のほか、ブラウザ版（vscode.dev・github.dev）でも使える。
+- **Keywords** — deep green of the leaves
+- **Strings** — vivid green of the leaves
+- **Functions** — blue hydrangeas
+- **Types** — the sea
+- **Numbers and constants** — purple hydrangeas, used only as an accent
+- **Variables and properties** — the text color; parameters in italics
+- **Punctuation** — a muted gray that stays out of the way
+- **Bracket pairs** — the three bands of the rainbow: lavender, mint and sky blue
+- Red and yellow appear only for errors and warnings.
 
-OS の明暗に合わせて切り替えるには、設定に次を書く。
+The integrated terminal uses the same 16 colors as the Ghostty theme in the same repository. All colors were tuned by measuring them on an actual VS Code screen, so the frequent ones stay easy to tell apart.
+
+## Usage
+
+Install **Ajisai Rainbow** from the Extensions view, then pick it with **Preferences: Color Theme**. Works in VS Code on Windows, macOS and Linux, in the browser (vscode.dev, github.dev), and in editors that use Open VSX (VSCodium, Cursor, and others).
+
+To follow your OS light/dark setting, add this to your settings:
 
 ```json
 "window.autoDetectColorScheme": true,
@@ -29,4 +41,8 @@ OS の明暗に合わせて切り替えるには、設定に次を書く。
 "workbench.preferredLightColorTheme": "Ajisai Rainbow Light"
 ```
 
-ソースと、Ghostty・Starship・lsd 用の同じ配色: <https://github.com/MoomA-0750/ajisai-rainbow>
+## Credits
+
+Colors are based on a pixel-art piece by 1041uuu (<https://www.tumblr.com/1041uuu/122075241013>). This theme only borrows the colors; the artwork itself is not included.
+
+Source, plus matching themes for Ghostty, Starship and lsd: <https://github.com/MoomA-0750/ajisai-rainbow>

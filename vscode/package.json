@@ -1,21 +1,53 @@
 {
   "name": "ajisai-rainbow",
   "displayName": "Ajisai Rainbow",
-  "description": "雨上がりの紫陽花と海、空の虹のドット絵から色を取った配色テーマ（暗い版・明るい版）",
+  "description": "A dark and light color theme taken from a pixel-art scene of hydrangeas after the rain, the sea, and a rainbow.",
   "version": "1.5.1",
   "publisher": "mooma-0750",
   "license": "MIT",
   "icon": "icon.png",
-  "galleryBanner": { "color": "#0e2a35", "theme": "dark" },
-  "repository": { "type": "git", "url": "https://github.com/MoomA-0750/ajisai-rainbow" },
-  "bugs": { "url": "https://github.com/MoomA-0750/ajisai-rainbow/issues" },
-  "engines": { "vscode": "^1.70.0" },
-  "categories": ["Themes"],
-  "keywords": ["theme", "color-theme", "dark", "light", "hydrangea", "pixel art", "teal"],
+  "galleryBanner": {
+    "color": "#0e2a35",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MoomA-0750/ajisai-rainbow",
+    "directory": "vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/MoomA-0750/ajisai-rainbow/issues"
+  },
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "color theme",
+    "dark",
+    "light",
+    "teal",
+    "mint",
+    "green",
+    "hydrangea",
+    "pixel art",
+    "rainbow"
+  ],
   "contributes": {
     "themes": [
-      { "label": "Ajisai Rainbow", "uiTheme": "vs-dark", "path": "./themes/ajisai-rainbow-color-theme.json" },
-      { "label": "Ajisai Rainbow Light", "uiTheme": "vs", "path": "./themes/ajisai-rainbow-light-color-theme.json" }
+      {
+        "label": "Ajisai Rainbow",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ajisai-rainbow-color-theme.json"
+      },
+      {
+        "label": "Ajisai Rainbow Light",
+        "uiTheme": "vs",
+        "path": "./themes/ajisai-rainbow-light-color-theme.json"
+      }
     ]
   }
 }
