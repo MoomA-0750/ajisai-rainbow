@@ -46,8 +46,10 @@ def build(name, label, kind):
         accent = g["cursor-color"]    # 空色
         accent_text = bg
         dim = p[8]                    # 控えめな文字
-        prop = p[7]                   # プロパティ
-        punct = mix(fg, p[8], 0.45)
+        comment = p[8]
+        prop = p[14]                  # プロパティ: 虹の空色
+        punct = mix(mix(fg, bg, 0.45), "#808080", 0.35)  # 記号: 色味を抜いて目立たせない
+        number = "#f2b8a2"            # 数と定数: 絵にない暖色（Omarchy のテーマの orange と同じ）
     else:
         # 昼の空と雲を基準に、外側ほど少し濃くする
         side = mix(bg, p[6], 0.08)
@@ -57,13 +59,21 @@ def build(name, label, kind):
         accent = p[6]                 # 濃い青緑（明るい背景で読める濃さ）
         accent_text = "#ffffff"
         dim = p[8]
-        prop = mix(fg, p[6], 0.45)
-        punct = mix(fg, p[8], 0.5)
+        comment = mix(p[8], bg, 0.15)
+        prop = "#0f7f8c"              # プロパティ: 空の青緑
+        punct = mix(mix(fg, bg, 0.3), "#606060", 0.55)
+        number = "#a8552f"
 
+    # エディターの背景: 暗い版は Ghostty と同じ。明るい版は、よく使われる明るいテーマ（背景の彩度 0〜4）に
+    # 寄せて薄いミントにする（真っ白にすると周りとの落差が大きいので、Solarized Light ほどの彩度を残す）
+    ed = bg if dark else mix(bg, "#ffffff", 0.4)
+    # 入力欄（検索・チャットなど）: 明るい版は周りのミントとエディターの間の色にして、白く浮かないようにする
+    field = raised if dark else mix(ed, mix(bg, p[6], 0.08), 0.45)
     sel = g["selection-background"]
     red, green, yellow, blue, magenta, cyan = (p[i] for i in (1, 2, 3, 4, 5, 6))
     b_red, b_green, b_yellow, b_blue, b_magenta, b_cyan = (p[i] for i in (9, 10, 11, 12, 13, 14))
-    rainbow = (b_magenta, b_green, b_blue) if dark else (magenta, green, blue)
+    # 括弧の色分け: 絵の虹の3本（藤色・ミント・空色）。紫が目立たないよう藤色は灰色寄りにする
+    rainbow = ("#bec3e8", "#8de7d0", "#6cd5f4") if dark else ("#6c6aa0", "#2a8a6c", "#2a82b4")
 
     colors = {
         # 全体
@@ -137,25 +147,25 @@ def build(name, label, kind):
         "editorGroupHeader.tabsBackground": side,
         "editorGroupHeader.tabsBorder": border,
         "editorGroup.border": border,
-        "tab.activeBackground": bg,
+        "tab.activeBackground": ed,
         "tab.activeForeground": fg,
         "tab.activeBorderTop": accent,
         "tab.inactiveBackground": side,
         "tab.inactiveForeground": dim,
         "tab.border": border,
-        "tab.hoverBackground": bg,
+        "tab.hoverBackground": ed,
         "tab.unfocusedActiveBorderTop": alpha(accent, 0.4),
         "breadcrumb.foreground": dim,
         "breadcrumb.focusForeground": fg,
         "breadcrumb.activeSelectionForeground": accent,
 
         # エディター
-        "editor.background": bg,
+        "editor.background": ed,
         "editor.foreground": fg,
         "editorCursor.foreground": g["cursor-color"],
         "editorLineNumber.foreground": alpha(dim, 0.8),
         "editorLineNumber.activeForeground": fg,
-        "editor.lineHighlightBackground": alpha(raised, 0.6),
+        "editor.lineHighlightBackground": alpha(raised, 0.6) if dark else mix(ed, p[6], 0.06),
         "editor.lineHighlightBorder": "#00000000",
         "editor.selectionBackground": alpha(sel, 0.85),
         "editor.inactiveSelectionBackground": alpha(sel, 0.45),
@@ -176,7 +186,7 @@ def build(name, label, kind):
         "editorCodeLens.foreground": dim,
         "editorInlayHint.foreground": dim,
         "editorInlayHint.background": alpha(raised, 0.6),
-        "editorGutter.background": bg,
+        "editorGutter.background": ed,
         "editorGutter.addedBackground": green,
         "editorGutter.modifiedBackground": blue,
         "editorGutter.deletedBackground": red,
@@ -222,7 +232,7 @@ def build(name, label, kind):
         "peekViewTitle.background": outer,
 
         # 入力欄・ボタン・ドロップダウン
-        "input.background": raised if dark else "#ffffff",
+        "input.background": field,
         "input.foreground": fg,
         "input.border": border,
         "input.placeholderForeground": alpha(dim, 0.9),
@@ -234,7 +244,17 @@ def build(name, label, kind):
         "inputValidation.warningBackground": side,
         "inputValidation.infoBorder": blue,
         "inputValidation.infoBackground": side,
-        "dropdown.background": raised if dark else "#ffffff",
+        # チャット（Copilot など）の入力欄と吹き出し
+        "agentsChatInput.background": field,
+        "agentsChatInput.foreground": fg,
+        "agentsChatInput.border": border,
+        "agentsChatInput.focusBorder": accent,
+        "agentsChatInput.placeholderForeground": alpha(dim, 0.9),
+        "chat.requestBubbleBackground": alpha(accent, 0.14),
+        "chat.requestBubbleHoverBackground": alpha(accent, 0.2),
+        "inlineChat.background": side,
+        "inlineChat.border": border,
+        "dropdown.background": field,
         "dropdown.foreground": fg,
         "dropdown.border": border,
         "button.background": accent,
@@ -242,7 +262,7 @@ def build(name, label, kind):
         "button.hoverBackground": mix(accent, "#ffffff" if dark else "#000000", 0.15),
         "button.secondaryBackground": raised,
         "button.secondaryForeground": fg,
-        "checkbox.background": raised if dark else "#ffffff",
+        "checkbox.background": field,
         "checkbox.border": border,
         "badge.background": accent,
         "badge.foreground": accent_text,
@@ -307,41 +327,69 @@ def build(name, label, kind):
         colors[f"terminal.ansi{n}"] = p[i]
         colors[f"terminal.ansiBright{n}"] = p[i + 8]
 
-    # 文法の色: 紫陽花の紫＝予約語、葉の緑＝文字列、青い紫陽花＝関数、空＝型、
-    # 絵にないクリーム色＝数と定数、ピンク＝正規表現・エスケープ・誤り
+    # 文法の色は、絵の色の割合に合わせて、コードの中で多く出る役目ほど絵で多い色にする。
+    #   絵: 空と雲のミント 58%、海 7%、葉 16%（深緑 10%・中間 4%・鮮やか 3%）、地面の紺 6%、
+    #       紫陽花の青 4.5%、紫陽花の紫 1.4%、赤・黄はなし
+    #   コード（コメントを除く文字数）: 変数 28%、文字列 22%、関数 12%、予約語 12%、記号 11%、
+    #       プロパティ 7%、型 5%、数と定数 2%
+    # 変数＝文字の色（暗い版は雲のミント、明るい版は地面の紺）、文字列＝鮮やかな葉、予約語＝深緑、
+    # プロパティ＝中間の葉、型＝海、関数＝紫陽花の青。紫陽花の紫は数と定数・正規表現だけの差し色にし、
+    # 赤と黄は文法には使わない（誤りと警告の表示だけ）。引数は文字の色の斜体、記号は色味を抜く
     def t(scope, color, style=None):
         s = {"foreground": color}
         if style:
             s["fontStyle"] = style
         return {"scope": scope, "settings": s}
 
-    func = blue if not dark else b_blue
-    typ = cyan if not dark else b_cyan
+    if dark:
+        string = "#9ade7c"    # 鮮やかな葉（地面の上で映えるよう黄緑に寄せる）
+        # 予約語と記号は、実際の画面で測った色の差が最も大きくなる色を探して決めた
+        keyword = "#60c096"   # 葉の緑（暗い背景で読める明るさ）
+        prop = fg             # プロパティは変数と同じ色（明るい版と同じ考え方）
+        typ = "#67d3ef"       # 海
+        func = "#7aa8ff"      # 青い紫陽花
+        number = "#c79bff"    # 紫の紫陽花（差し色）
+        regex = "#e3a6ff"     # 淡い紫の紫陽花
+        punct = "#939d9d"     # 電柱や犬の灰色
+    else:
+        # 明るい版は、ミントの背景でも見分けられるよう彩度を上げる（よく使われる明るいテーマの
+        # 文字の彩度は平均 47〜70）。文字列の緑は背景のミントと色相を離すため黄緑に寄せる
+        string = "#5c7700"    # 鮮やかな葉（予約語の緑と離すため黄緑に寄せる）
+        # 予約語・型は、変数の紺・関数の青・文字列の緑から色の差が最も大きくなる色を探して決めた。
+        # 明るい背景で読める濃さの青緑は彩度が出せない（色域の限界）ので、緑と青で鮮やかさを出す
+        keyword = "#157d42"   # 深緑の葉（色相を緑に寄せて彩度を上げる）
+        prop = fg             # プロパティは変数と同じ色（寒色を詰め込みすぎると見分けられないため）
+        typ = "#0974a5"       # 海
+        func = "#2b55c9"      # 青い紫陽花
+        number = "#7a4fe0"    # 紫の紫陽花（差し色）
+        regex = "#a23fc0"     # 赤みの紫陽花
+        comment = "#668a91"
+        punct = "#5a6e72"     # 電柱や犬の灰青緑
     token_colors = [
-        t(["comment", "punctuation.definition.comment", "string.comment"], dim, "italic"),
+        t(["comment", "punctuation.definition.comment", "string.comment"], comment, "italic"),
         t(["keyword", "storage.type", "storage.modifier", "keyword.control", "keyword.operator.new",
            "keyword.operator.expression", "keyword.operator.logical.python", "variable.language.this",
-           "variable.language.self", "variable.language.super"], magenta),
+           "variable.language.self", "variable.language.super"], keyword),
         t(["keyword.operator", "punctuation", "meta.brace", "punctuation.separator", "punctuation.terminator"], punct),
-        t(["string", "string.quoted", "string.template", "markup.inline.raw"], green),
-        t(["string.regexp", "constant.character.escape", "constant.other.placeholder"], red),
+        t(["string", "string.quoted", "string.template", "markup.inline.raw"], string),
+        t(["string.regexp", "constant.character.escape", "constant.other.placeholder"], regex),
         t(["constant.numeric", "constant.language", "constant.language.boolean", "support.constant",
-           "variable.other.constant", "variable.other.enummember"], yellow),
+           "variable.other.constant", "variable.other.enummember"], number),
         t(["entity.name.function", "support.function", "meta.function-call entity.name.function",
            "variable.function"], func),
         t(["entity.name.type", "entity.name.class", "entity.name.namespace", "support.type", "support.class",
            "entity.other.inherited-class", "storage.type.primitive", "entity.name.type.interface"], typ),
         t(["variable", "variable.other.readwrite", "meta.definition.variable"], fg),
-        t(["variable.parameter", "meta.parameter"], prop, "italic"),
+        t(["variable.parameter", "meta.parameter"], fg, "italic"),
         t(["variable.other.property", "variable.other.object.property", "support.variable.property",
            "meta.object-literal.key", "entity.name.tag.yaml", "support.type.property-name"], prop),
         t(["entity.name.tag", "punctuation.definition.tag"], func),
-        t(["entity.other.attribute-name"], typ, "italic"),
+        t(["entity.other.attribute-name"], prop, "italic"),
         t(["entity.name.decorator", "meta.decorator", "punctuation.decorator", "entity.name.function.decorator"], cyan),
         t(["support.type.property-name.css", "support.type.vendored.property-name.css"], prop),
-        t(["keyword.other.unit", "constant.numeric.css"], yellow),
+        t(["keyword.other.unit", "constant.numeric.css"], number),
         t(["entity.other.attribute-name.class.css", "entity.other.attribute-name.id.css"], typ),
-        t(["markup.heading", "entity.name.section"], magenta, "bold"),
+        t(["markup.heading", "entity.name.section"], keyword, "bold"),
         t(["markup.bold"], fg, "bold"),
         t(["markup.italic"], fg, "italic"),
         t(["markup.underline.link", "string.other.link"], func, "underline"),
@@ -365,16 +413,16 @@ def build(name, label, kind):
         "method": func,
         "decorator": cyan,
         "macro": cyan,
-        "parameter": {"foreground": prop, "italic": True},
+        "parameter": {"foreground": fg, "italic": True},
         "property": prop,
-        "enumMember": yellow,
-        "variable.readonly": yellow,
+        "enumMember": number,
+        "variable.readonly": fg,
         "variable.defaultLibrary": typ,
-        "keyword": magenta,
-        "string": green,
-        "number": yellow,
-        "regexp": red,
-        "comment": {"foreground": dim, "italic": True},
+        "keyword": keyword,
+        "string": string,
+        "number": number,
+        "regexp": regex,
+        "comment": {"foreground": comment, "italic": True},
     }
 
     return {
