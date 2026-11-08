@@ -28,7 +28,7 @@ theme = light:ajisai-rainbow-light,dark:ajisai-rainbow
 
 ## VS Code で使う
 
-`vscode/` に VS Code の拡張機能がある。暗い版「Ajisai Rainbow」と明るい版「Ajisai Rainbow Light」が入っていて、Windows・macOS・Linux のデスクトップ版と、ブラウザ版（vscode.dev・github.dev）で使える。
+`vscode/` に VS Code の拡張機能がある。[Open VSX](https://open-vsx.org/extension/mooma-0750/ajisai-rainbow) で公開している（VSCodium・Cursor などの拡張機能のビューで「Ajisai Rainbow」を探して入れられる）。Visual Studio Marketplace は審査中。暗い版「Ajisai Rainbow」と明るい版「Ajisai Rainbow Light」が入っていて、Windows・macOS・Linux のデスクトップ版と、ブラウザ版（vscode.dev・github.dev）で使える。
 
 - 絵の色の割合に合わせて、コードで多く出る役目ほど絵で多い色にした。予約語は葉の深緑、文字列は鮮やかな葉、関数は紫陽花の青、型は海。紫陽花の紫は数と定数だけの差し色で、赤と黄は文法に使わない
 - 括弧の色分けは絵の虹の3本（灰色寄りの藤色・ミント・空色）
