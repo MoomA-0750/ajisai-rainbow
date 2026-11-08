@@ -26,6 +26,24 @@ ln -sf "$PWD"/ghostty/ajisai-rainbow* ~/.config/ghostty/themes/
 theme = light:ajisai-rainbow-light,dark:ajisai-rainbow
 ```
 
+## VS Code で使う
+
+`vscode/` に VS Code の拡張機能がある。暗い版「Ajisai Rainbow」と明るい版「Ajisai Rainbow Light」が入っていて、Windows・macOS・Linux のデスクトップ版と、ブラウザ版（vscode.dev・github.dev）で使える。
+
+- 予約語は紫の紫陽花、文字列は葉の緑、関数は青い紫陽花、型は空の色。誤りはピンク、数と定数はクリーム色
+- 括弧の色分けは絵の虹の3本（藤色・ミント・空色）
+- 統合ターミナルの16色は Ghostty のテーマと同じ
+
+手元で拡張機能のファイル（.vsix）を作って入れるには:
+
+```sh
+cd vscode
+npx @vscode/vsce package
+code --install-extension ajisai-rainbow-*.vsix
+```
+
+色は `tools/vscode_theme.py` が Ghostty のテーマから作る。Ghostty の色を直したら `python3 tools/vscode_theme.py` で作り直す。
+
 ## Starship・lsd で使う
 
 どちらも色を 16 色の番号で書いてあり、端末のテーマから色を取る。Ghostty が明暗を切り替えると、プロンプトと `lsd` の色も一緒に変わる。
